@@ -1,0 +1,60 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.Innovation.ui5Project.controller.View1"
+	xmlns:unified="sap.ui.unified" xmlns:dnd="sap.ui.core.dnd" displayBlock="true">
+	<Shell id="shell">
+		<SplitApp id="app" initialDetail="detail" initialMaster="master">
+			<detailPages>
+				<Page id="detail" title="Planning Calendar" backgroundDesign="Solid" class="sapUiStdPage">
+					<PlanningCalendar id="PC1" startDate="{path: 'calendarModel>/startDate'}" rows="{path: 'calendarModel>/people'}"
+						appointmentsVisualization="Filled">
+						<rows>
+							<PlanningCalendarRow title="{calendarModel>name}" text="{calendarModel>role}" enableAppointmentsDragAndDrop="true"
+								enableAppointmentsResize="true" enableAppointmentsCreate="true" appointmentDrop="handleAppointmentDrop"
+								appointmentDragEnter="handleAppointmentDragEnter" appointmentResize="handleAppointmentResize" appointmentCreate="handleAppointmentCreate"
+								appointments="{calendarModel>appointments}">
+								<appointments>
+									<unified:CalendarAppointment startDate="{calendarModel>start}" endDate="{calendarModel>end}" icon="{calendarModel>pic}"
+										title="{calendarModel>title}" text="{calendarModel>info}" type="{calendarModel>type}" tentative="{tentative}"></unified:CalendarAppointment>
+								</appointments>
+							</PlanningCalendarRow>
+						</rows>
+					</PlanningCalendar>
+					<!--<SinglePlanningCalendar class="sapUiNoContentPadding jbtasksCalendar" id="SPCTasks" fullDay="false" viewChange="handleViewChange"-->
+					<!--	appointmentSelect="handleAppointmentSelectTasks" headerDateSelect="handleHeaderDateSelect" startDateChange="handleStartDateChange"-->
+					<!--	appointmentDrop="handleAppointmentResizeAndDragAndDropTasks" appointmentResize="handleAppointmentResizeAndDragAndDropTasks"-->
+					<!--	appointmentCreate="handleAppointmentCreateDnDTasks" moreLinkPress="handleMoreLinkPress"-->
+					<!--	enableAppointmentsDragAndDrop="{worklistView>/enableAppointmentsDragAndDrop}" enableAppointmentsResize="true"-->
+					<!--	enableAppointmentsCreate="true" stickyMode="All" startDate="{path: 'worklistView>/startDate'}" appointments="{calendarModel>appointments}">-->
+					<!--	<actions></actions>-->
+					<!--	<views>-->
+					<!--		<SinglePlanningCalendarDayView key="DayView" title="{i18n>tDay}"/>-->
+					<!--		<SinglePlanningCalendarWorkWeekView key="WorkWeekView" title="{i18n>tWorkWeek}"/>-->
+					<!--		<SinglePlanningCalendarWeekView key="WeekView" title="{i18n>tWeek}"/>-->
+					<!--		<SinglePlanningCalendarMonthView key="MonthView" title="{i18n>tMonth}"/>-->
+					<!--	</views>-->
+					<!--	<appointments>-->
+					<!--		<unified:CalendarAppointment id="calendarAppointmentViewTasks" icon="{calendarModel>pic}" title="{calendarModel>title}"-->
+					<!--			type="{calendarModel>type}" text="{calendarModel>info}" startDate="{calendarModel>start}" endDate="{calendarModel>end}"></unified:CalendarAppointment>-->
+					<!--	</appointments>-->
+					<!--</SinglePlanningCalendar>-->
+				</Page>
+			</detailPages>
+			<masterPages>
+				<Page id="master" title="List" backgroundDesign="List" icon="sap-icon://action" class="sapUiStdPage">
+					<List id="idList" items="{listModel>/}" growing="true" growingThreshold="50" includeItemInSelection="false">
+						<infoToolbar>
+							<OverflowToolbar visible="false" id="idInfoToolbar">
+								<Label id="idFilterLabel"/>
+							</OverflowToolbar>
+						</infoToolbar>
+						<dragDropConfig>
+							<dnd:DragDropInfo sourceAggregation="items" targetElement="PC1-Table" targetAggregation="items" dragEnter="onListPlanningCalendardragEnter"
+								dragStart="onListPlanningCalendardragStart" drop="onListPlanningCalendarDrop"/>
+						</dragDropConfig>
+						<StandardListItem id="listItem" title="{listModel>ProductName}" description="{listModel>ShipperName}" icon="{listModel>ProductPicUrl}"
+							iconDensityAware="false" iconInset="false"/>
+					</List>
+				</Page>
+			</masterPages>
+		</SplitApp>
+	</Shell>
+</mvc:View>
